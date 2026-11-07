@@ -29,4 +29,11 @@ describe('ProductosService', () => {
     http.expectOne(req => req.url === environment.productosUrl).flush('Error', { status: 503, statusText: 'Unavailable' });
     expect(fallo).toBe(true);
   });
+
+  it('rechaza un JSON incompleto aunque la petición HTTP sea exitosa', () => {
+    let mensaje = '';
+    servicio.listar().subscribe({ error: (error: Error) => mensaje = error.message });
+    http.expectOne(req => req.url === environment.productosUrl).flush({ products: [{ id: 1 }] });
+    expect(mensaje).toContain('formato esperado');
+  });
 });
