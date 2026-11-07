@@ -3,6 +3,15 @@
   <ion-card><ion-card-header><div class="profile-avatar"><ion-icon name="person-circle-outline" aria-hidden="true"></ion-icon></div><ion-card-title>Datos del perfil</ion-card-title><ion-card-subtitle>Perfil local · Sin inicio de sesión</ion-card-subtitle></ion-card-header><ion-card-content>
     <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
       <ion-list lines="full"><ion-item><ion-input label="Nombre *" labelPlacement="stacked" placeholder="Tu nombre" formControlName="nombre" autocomplete="name" [maxlength]="60"></ion-input></ion-item><ion-item><ion-input label="Correo electrónico *" labelPlacement="stacked" placeholder="nombre@ejemplo.com" type="email" formControlName="correo" autocomplete="email" [maxlength]="120"></ion-input></ion-item><ion-item><ion-input label="Ciudad (opcional)" labelPlacement="stacked" placeholder="Tu ciudad" formControlName="ciudad" autocomplete="address-level2" [maxlength]="60"></ion-input></ion-item></ion-list>
+      @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) {
+        <p class="field-error" role="alert">Escribí un nombre de hasta 60 caracteres que no esté vacío.</p>
+      }
+      @if (formulario.controls.correo.touched && formulario.controls.correo.invalid) {
+        <p class="field-error" role="alert">Ingresá un correo válido, por ejemplo nombre@ejemplo.com.</p>
+      }
+      @if (formulario.controls.ciudad.touched && formulario.controls.ciudad.invalid) {
+        <p class="field-error" role="alert">La ciudad debe tener como máximo 60 caracteres.</p>
+      }
       @if (mensaje) { <p [class.notice]="error" role="status">{{ mensaje }}</p> }
       <ion-button type="submit" expand="block">Guardar perfil</ion-button>
       <ion-button type="button" expand="block" fill="clear" color="danger" (click)="borrar()">Borrar perfil local</ion-button>
