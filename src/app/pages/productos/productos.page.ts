@@ -3,9 +3,11 @@ import { Subscription } from 'rxjs';
 import { Producto } from '../../models/producto';
 import { ProductosService } from '../../services/productos.service';
 import { CarritoService } from '../../services/carrito.service';
+import { nombreCategoria } from '../../models/categorias';
 
 @Component({ selector: 'app-productos', templateUrl: './productos.page.html', styleUrls: ['./productos.page.scss'], standalone: false })
 export class ProductosPage implements OnInit, OnDestroy {
+  readonly nombreCategoria = nombreCategoria;
   productos: Producto[] = [];
   cargando = true;
   error = '';
