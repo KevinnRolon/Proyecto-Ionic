@@ -47,8 +47,9 @@ export class ProductosPage implements OnInit, OnDestroy {
   get categorias(): string[] { return [...new Set(this.productos.map(p => p.category))].sort(); }
 
   get filtrados(): Producto[] {
-    const termino = this.busqueda.trim().toLocaleLowerCase();
-    const lista = this.productos.filter(p => (p.title + ' ' + p.description).toLocaleLowerCase().includes(termino) &&
+    const normalizar = (texto: string): string => texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
+    const termino = normalizar(this.busqueda.trim());
+    const lista = this.productos.filter(p => normalizar(p.title + ' ' + p.description + ' ' + nombreCategoria(p.category)).includes(termino) &&
       (this.categoria === 'todas' || p.category === this.categoria) && p.price <= this.precioMaximo);
     return lista.sort((a, b) => this.orden === 'menor' ? a.price - b.price : this.orden === 'mayor' ? b.price - a.price : a.title.localeCompare(b.title));
   }
