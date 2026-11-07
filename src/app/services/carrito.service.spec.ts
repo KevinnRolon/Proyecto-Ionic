@@ -6,6 +6,13 @@ const producto: Producto = { id: 1, title: 'Producto de prueba', price: 12.5, st
 describe('CarritoService', () => {
   beforeEach(() => localStorage.clear());
 
+  it('suma los precios en centavos sin arrastrar errores de punto flotante', () => {
+    const carrito = new CarritoService();
+    carrito.agregar({ ...producto, price: 0.1 });
+    carrito.agregar({ ...producto, id: 2, price: 0.2 });
+    expect(carrito.total()).toBe(0.3);
+  });
+
   it('limita las unidades al stock y calcula el total', () => {
     const carrito = new CarritoService();
     expect(carrito.agregar(producto)).toBe(true);
