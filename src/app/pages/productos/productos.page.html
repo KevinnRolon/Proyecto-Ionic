@@ -19,7 +19,7 @@
         <ion-select label="Categoría" labelPlacement="stacked" interface="popover" [(ngModel)]="categoria"><ion-select-option value="todas">Todas las categorías</ion-select-option>
           @for (categoriaItem of categorias; track categoriaItem) { <ion-select-option [value]="categoriaItem">{{ nombreCategoria(categoriaItem) }}</ion-select-option> }
         </ion-select>
-        <ion-select label="Ordenar por" labelPlacement="stacked" interface="popover" [(ngModel)]="orden"><ion-select-option value="nombre">Nombre A–Z</ion-select-option><ion-select-option value="menor">Menor precio</ion-select-option><ion-select-option value="mayor">Mayor precio</ion-select-option></ion-select>
+        <ion-select label="Ordenar por" labelPlacement="stacked" interface="popover" [(ngModel)]="orden"><ion-select-option value="nombre">Nombre A–Z</ion-select-option><ion-select-option value="menor">Menor precio</ion-select-option><ion-select-option value="mayor">Mayor precio</ion-select-option><ion-select-option value="calificacion">Mejor calificación</ion-select-option></ion-select>
         <div class="range-label">Precio máximo <strong>{{ precioMaximo | currency:'USD':'symbol':'1.0-0' }}</strong></div>
         <ion-range aria-label="Precio máximo en dólares" [min]="0" [max]="limitePrecio" [step]="1" [(ngModel)]="precioMaximo"></ion-range>
         <ion-toggle class="stock-filter" [(ngModel)]="soloDisponibles">Solo con stock</ion-toggle>

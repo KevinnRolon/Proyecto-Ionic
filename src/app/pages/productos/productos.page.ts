@@ -52,7 +52,12 @@ export class ProductosPage implements OnInit, OnDestroy {
     const termino = normalizar(this.busqueda.trim());
     const lista = this.productos.filter(p => normalizar(p.title + ' ' + p.description + ' ' + nombreCategoria(p.category)).includes(termino) &&
       (this.categoria === 'todas' || p.category === this.categoria) && p.price <= this.precioMaximo && (!this.soloDisponibles || p.stock > 0));
-    return lista.sort((a, b) => this.orden === 'menor' ? a.price - b.price : this.orden === 'mayor' ? b.price - a.price : a.title.localeCompare(b.title));
+    return lista.sort((a, b) => {
+      if (this.orden === 'menor') return a.price - b.price;
+      if (this.orden === 'mayor') return b.price - a.price;
+      if (this.orden === 'calificacion') return b.rating - a.rating || a.title.localeCompare(b.title);
+      return a.title.localeCompare(b.title);
+    });
   }
 
   limpiar(): void {
