@@ -50,4 +50,14 @@ describe('CarritoService', () => {
       expect(carrito.aviso()).toContain('solo durante esta sesión');
     } finally { escritura.mockRestore(); }
   });
+
+  it('descarta registros repetidos sin duplicar el total ni superar el stock', () => {
+    localStorage.setItem('bolsa-urbana-carrito', JSON.stringify([
+      { producto, cantidad: 2 }, { producto, cantidad: 2 },
+    ]));
+    const carrito = new CarritoService();
+    expect(carrito.productosDistintos()).toBe(1);
+    expect(carrito.cantidad()).toBe(2);
+    expect(carrito.total()).toBe(25);
+  });
 });

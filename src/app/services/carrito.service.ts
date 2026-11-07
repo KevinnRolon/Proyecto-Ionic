@@ -47,12 +47,16 @@ export class CarritoService {
     try {
       const datos: unknown = JSON.parse(localStorage.getItem(CLAVE) ?? '[]');
       if (!Array.isArray(datos)) return [];
+      const idsLeidos = new Set<number>();
       return datos.filter((item): item is ItemCarrito => {
         const p = item?.producto;
-        return p && Number.isInteger(p.id) && typeof p.title === 'string' &&
+        const valido = p && Number.isInteger(p.id) && typeof p.title === 'string' &&
           typeof p.thumbnail === 'string' && Number.isFinite(p.price) && p.price >= 0 &&
           Number.isInteger(p.stock) && p.stock > 0 && Number.isInteger(item.cantidad) &&
           item.cantidad > 0 && item.cantidad <= p.stock;
+        if (!valido || idsLeidos.has(p.id)) return false;
+        idsLeidos.add(p.id);
+        return true;
       });
     } catch { return []; }
   }
