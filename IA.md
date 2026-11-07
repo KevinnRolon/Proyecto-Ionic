@@ -29,3 +29,6 @@ Estos ajustes y verificaciones también se realizaron con asistencia de IA.
 Todavía no se han declarado modificaciones personales del estudiante. Completar esta sección con cambios reales, qué se entendió y qué se corrigió; no declarar porcentajes sin una medición acordada con el docente.
 
 Los commits representan etapas reales de esta sesión, no días de trabajo ni autoría humana independientes.
+
+## Autoría en Git
+Por solicitud de Kevinn Rolón, el historial final tendrá 20 commits: 13 con su nombre como autor de Git y Codex como coautor, y 7 con Codex como autor. El nombre del autor en Git no demuestra quién escribió manualmente el código. Los 17 cambios adicionales también se implementan con asistencia de IA y se crean en la fecha real, sin alterar las fechas anteriores.
