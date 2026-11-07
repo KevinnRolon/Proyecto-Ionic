@@ -13,6 +13,7 @@ export class ProductosPage implements OnInit, OnDestroy {
   error = '';
   busqueda = '';
   categoria = 'todas';
+  soloDisponibles = false;
   orden = 'nombre';
   precioMaximo = 0;
   limitePrecio = 0;
@@ -50,11 +51,12 @@ export class ProductosPage implements OnInit, OnDestroy {
     const normalizar = (texto: string): string => texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
     const termino = normalizar(this.busqueda.trim());
     const lista = this.productos.filter(p => normalizar(p.title + ' ' + p.description + ' ' + nombreCategoria(p.category)).includes(termino) &&
-      (this.categoria === 'todas' || p.category === this.categoria) && p.price <= this.precioMaximo);
+      (this.categoria === 'todas' || p.category === this.categoria) && p.price <= this.precioMaximo && (!this.soloDisponibles || p.stock > 0));
     return lista.sort((a, b) => this.orden === 'menor' ? a.price - b.price : this.orden === 'mayor' ? b.price - a.price : a.title.localeCompare(b.title));
   }
 
   limpiar(): void {
+    this.soloDisponibles = false;
     this.busqueda = '';
     this.categoria = 'todas';
     this.orden = 'nombre';

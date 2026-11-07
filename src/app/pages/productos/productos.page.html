@@ -22,6 +22,7 @@
         <ion-select label="Ordenar por" labelPlacement="stacked" interface="popover" [(ngModel)]="orden"><ion-select-option value="nombre">Nombre A–Z</ion-select-option><ion-select-option value="menor">Menor precio</ion-select-option><ion-select-option value="mayor">Mayor precio</ion-select-option></ion-select>
         <div class="range-label">Precio máximo <strong>{{ precioMaximo | currency:'USD':'symbol':'1.0-0' }}</strong></div>
         <ion-range aria-label="Precio máximo en dólares" [min]="0" [max]="limitePrecio" [step]="1" [(ngModel)]="precioMaximo"></ion-range>
+        <ion-toggle class="stock-filter" [(ngModel)]="soloDisponibles">Solo con stock</ion-toggle>
         <ion-button expand="block" fill="outline" (click)="limpiar()">Limpiar filtros</ion-button>
         <p class="small muted">Precios de referencia en USD. Catálogo de demostración de DummyJSON.</p>
       </aside>
