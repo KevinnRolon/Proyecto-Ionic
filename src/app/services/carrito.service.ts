@@ -7,6 +7,7 @@ const CLAVE = 'bolsa-urbana-carrito';
 export class CarritoService {
   private readonly lista = signal<ItemCarrito[]>(this.leer());
   readonly items = this.lista.asReadonly();
+  readonly productosDistintos = computed(() => this.items().length);
   readonly cantidad = computed(() => this.items().reduce((suma, item) => suma + item.cantidad, 0));
   readonly total = computed(() => this.items().reduce((centavos, item) => centavos + Math.round(item.producto.price * 100) * item.cantidad, 0) / 100);
   readonly aviso = signal('');
