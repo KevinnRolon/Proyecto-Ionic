@@ -6,7 +6,7 @@
   } @else {
     <div class="cart-layout"><section aria-label="Productos seleccionados">
       @for (item of carrito.items(); track item.producto.id) {
-        <ion-card class="cart-item"><img [src]="item.producto.thumbnail" [alt]="item.producto.title"><div class="item-info"><h2>{{ item.producto.title }}</h2><p class="muted small">{{ item.producto.price | currency:'USD' }} por unidad</p><div class="quantity">
+        <ion-card class="cart-item"><img appImagenRespaldo [src]="item.producto.thumbnail" [alt]="item.producto.title"><div class="item-info"><h2>{{ item.producto.title }}</h2><p class="muted small">{{ item.producto.price | currency:'USD' }} por unidad</p><div class="quantity">
           <ion-button fill="outline" size="small" [attr.aria-label]="'Restar una unidad de ' + item.producto.title" (click)="carrito.cambiar(item.producto.id, item.cantidad - 1)"><ion-icon slot="icon-only" name="remove-outline" aria-hidden="true"></ion-icon></ion-button>
           <span aria-live="polite">{{ item.cantidad }}</span>
           <ion-button fill="outline" size="small" [disabled]="item.cantidad >= item.producto.stock" [attr.aria-label]="'Sumar una unidad de ' + item.producto.title" (click)="carrito.cambiar(item.producto.id, item.cantidad + 1)"><ion-icon slot="icon-only" name="add-outline" aria-hidden="true"></ion-icon></ion-button>

@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular/lazy';
 import { ProductosPage } from './productos.page';
+import { ImagenRespaldoDirective } from '../../directives/imagen-respaldo.directive';
 
 @NgModule({
   declarations: [ProductosPage],
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule.forChild([{ path: '', component: ProductosPage }])],
+  imports: [CommonModule, FormsModule, IonicModule, ImagenRespaldoDirective, RouterModule.forChild([{ path: '', component: ProductosPage }])],
 })
 export class ProductosPageModule {}
