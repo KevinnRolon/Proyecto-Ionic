@@ -36,8 +36,8 @@
               <ion-col size="12" size-sm="6" size-lg="4"><ion-card class="product-card">
                 <div class="product-photo"><img appImagenRespaldo [src]="producto.thumbnail" [alt]="producto.title" loading="lazy"><ion-badge class="rating" color="light"><ion-icon name="star" aria-hidden="true"></ion-icon> {{ producto.rating | number:'1.1-1' }}</ion-badge></div>
                 <ion-card-header><ion-card-subtitle>{{ nombreCategoria(producto.category) }}</ion-card-subtitle><ion-card-title>{{ producto.title }}</ion-card-title></ion-card-header>
-                <ion-card-content><p class="description">{{ producto.description }}</p><div class="product-price"><span class="price">{{ producto.price | currency:'USD' }}</span><span class="small muted">{{ producto.stock > 0 ? producto.stock + ' disponibles' : 'Sin stock' }}</span></div>
-                  <ion-button expand="block" [disabled]="producto.stock === 0" (click)="agregar(producto)" [attr.aria-label]="'Agregar ' + producto.title + ' al carrito'"><ion-icon slot="start" name="add-outline" aria-hidden="true"></ion-icon>Agregar</ion-button>
+                <ion-card-content><p class="description">{{ producto.description }}</p><div class="product-price"><span class="price">{{ producto.price | currency:'USD' }}</span><span class="small muted">{{ disponibilidad(producto.stock) }}</span></div>
+                  <ion-button expand="block" [disabled]="producto.stock <= 0" (click)="agregar(producto)" [attr.aria-label]="'Agregar ' + producto.title + ' al carrito'"><ion-icon slot="start" name="add-outline" aria-hidden="true"></ion-icon>Agregar</ion-button>
                 </ion-card-content>
               </ion-card></ion-col>
             }

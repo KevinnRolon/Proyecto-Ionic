@@ -47,6 +47,11 @@ export class ProductosPage implements OnInit, OnDestroy {
 
   get categorias(): string[] { return [...new Set(this.productos.map(p => p.category))].sort(); }
 
+  disponibilidad(stock: number): string {
+    if (stock <= 0) return 'Sin stock';
+    return stock === 1 ? '1 unidad disponible' : `${stock} unidades disponibles`;
+  }
+
   get filtrados(): Producto[] {
     const normalizar = (texto: string): string => texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
     const termino = normalizar(this.busqueda.trim());
