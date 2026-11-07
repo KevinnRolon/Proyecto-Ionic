@@ -33,4 +33,12 @@ p { line-height: 1.6; }
 .page-heading p { margin: 0; color: #65746b; }
 .price { font-size: 22px; font-weight: 750; color: #203b30; }
 .small { font-size: 13px; }
+ion-button::part(native):focus-visible,
+ion-tab-button::part(native):focus-visible {
+  outline: 3px solid #a37815;
+  outline-offset: -3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
 @media (max-width: 580px) { .shell { padding: 20px 16px 32px; } .brand { padding: 0 16px; } .brand-note { display: none; } }

@@ -3,13 +3,13 @@
   <span class="brand-note muted small">Tu próxima buena elección</span>
   <ion-button fill="clear" routerLink="/tabs/carrito" aria-label="Ver carrito">Carrito · {{ carrito.cantidad() }}<ion-icon slot="end" name="cart-outline" aria-hidden="true"></ion-icon></ion-button>
 </div></ion-toolbar></ion-header>
-<ion-content><main class="shell">
+<ion-content><main class="shell" [attr.aria-busy]="cargando">
   <section class="hero">
     <div><span class="eyebrow">Objetos para tu día a día</span><h1>Encontrá algo<br>que vaya con vos.</h1><p>Explorá, elegí y armá tu carrito a tu ritmo.</p><span class="demo-label">Tienda de práctica · Sin pagos reales</span></div>
     <div class="hero-mark" aria-hidden="true"><ion-icon name="bag-handle-outline"></ion-icon><span>BU / 01</span></div>
   </section>
   @if (cargando) {
-    <div class="empty" role="status"><ion-spinner name="crescent"></ion-spinner><p>Cargando el catálogo…</p></div>
+    <div class="empty" role="status" aria-live="polite"><ion-spinner name="crescent" aria-hidden="true"></ion-spinner><p>Cargando el catálogo…</p></div>
   } @else if (error) {
     <div class="empty"><p role="alert">{{ error }}</p><ion-button (click)="cargar()"><ion-icon slot="start" name="refresh-outline" aria-hidden="true"></ion-icon>Reintentar</ion-button></div>
   } @else {
