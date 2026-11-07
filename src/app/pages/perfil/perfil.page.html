@@ -5,6 +5,7 @@
       <ion-list lines="full"><ion-item><ion-input label="Nombre *" labelPlacement="stacked" placeholder="Tu nombre" formControlName="nombre" autocomplete="name" [maxlength]="60"></ion-input></ion-item><ion-item><ion-input label="Correo electrónico *" labelPlacement="stacked" placeholder="nombre@ejemplo.com" type="email" formControlName="correo" autocomplete="email" [maxlength]="120"></ion-input></ion-item><ion-item><ion-input label="Ciudad (opcional)" labelPlacement="stacked" placeholder="Tu ciudad" formControlName="ciudad" autocomplete="address-level2" [maxlength]="60"></ion-input></ion-item></ion-list>
       @if (mensaje) { <p [class.notice]="error" role="status">{{ mensaje }}</p> }
       <ion-button type="submit" expand="block">Guardar perfil</ion-button>
+      <ion-button type="button" expand="block" fill="clear" color="danger" (click)="borrar()">Borrar perfil local</ion-button>
     </form><p class="small muted">Estos datos se guardan solo en tu navegador. Para la demostración podés usar datos ficticios.</p>
   </ion-card-content></ion-card>
   <div class="about"><ion-icon name="leaf-outline" aria-hidden="true"></ion-icon><div><strong>Bolsa Urbana</strong><p class="small muted">Proyecto final de Ionic + Angular. Una tienda para practicar productos, servicios y navegación.</p></div></div>

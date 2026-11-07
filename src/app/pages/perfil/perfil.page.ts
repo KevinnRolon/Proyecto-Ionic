@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular/lazy';
 
 @Component({ selector: 'app-perfil', templateUrl: './perfil.page.html', styleUrls: ['./perfil.page.scss'], standalone: false })
 export class PerfilPage implements OnInit {
@@ -7,7 +8,7 @@ export class PerfilPage implements OnInit {
   error = false;
   readonly formulario;
 
-  constructor(private formularios: FormBuilder) {
+  constructor(private formularios: FormBuilder, private alertas: AlertController) {
     this.formulario = this.formularios.nonNullable.group({
       nombre: ['', [Validators.required, Validators.pattern(/\S/), Validators.maxLength(60)]],
       correo: ['', [Validators.required, Validators.email, Validators.maxLength(120)]],
@@ -45,5 +46,27 @@ export class PerfilPage implements OnInit {
       this.error = true;
       this.mensaje = 'El navegador no permitió guardar el perfil.';
     }
+  }
+
+  async borrar(): Promise<void> {
+    const alerta = await this.alertas.create({
+      header: '¿Borrar el perfil local?',
+      message: 'Se eliminarán el nombre, correo y ciudad guardados en este navegador.',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        { text: 'Borrar', role: 'destructive', handler: () => {
+          try {
+            localStorage.removeItem('bolsa-urbana-perfil');
+            this.formulario.reset();
+            this.error = false;
+            this.mensaje = 'Perfil eliminado de este navegador.';
+          } catch {
+            this.error = true;
+            this.mensaje = 'No se pudo eliminar el perfil guardado.';
+          }
+        } },
+      ],
+    });
+    await alerta.present();
   }
 }
