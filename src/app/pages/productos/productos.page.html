@@ -1,0 +1,51 @@
+<ion-header><ion-toolbar><div class="brand">
+  <span class="brand-name"><ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>bolsa urbana<span class="brand-dot">.</span></span>
+  <span class="brand-note muted small">Tu próxima buena elección</span>
+  <ion-button fill="clear" routerLink="/tabs/carrito" aria-label="Ver carrito">Carrito · {{ carrito.cantidad() }}<ion-icon slot="end" name="cart-outline" aria-hidden="true"></ion-icon></ion-button>
+</div></ion-toolbar></ion-header>
+<ion-content><main class="shell">
+  <section class="hero">
+    <div><span class="eyebrow">Objetos para tu día a día</span><h1>Encontrá algo<br>que vaya con vos.</h1><p>Explorá, elegí y armá tu carrito a tu ritmo.</p><span class="demo-label">Tienda de práctica · Sin pagos reales</span></div>
+    <div class="hero-mark" aria-hidden="true"><ion-icon name="bag-handle-outline"></ion-icon><span>BU / 01</span></div>
+  </section>
+  @if (cargando) {
+    <div class="empty" role="status"><ion-spinner name="crescent"></ion-spinner><p>Cargando el catálogo…</p></div>
+  } @else if (error) {
+    <div class="empty"><p role="alert">{{ error }}</p><ion-button (click)="cargar()"><ion-icon slot="start" name="refresh-outline" aria-hidden="true"></ion-icon>Reintentar</ion-button></div>
+  } @else {
+    <div class="catalogue-layout">
+      <aside class="filters" aria-label="Filtros del catálogo">
+        <h2>Tu selección</h2><ion-searchbar placeholder="Buscar productos" aria-label="Buscar productos" [(ngModel)]="busqueda" [debounce]="150"></ion-searchbar>
+        <ion-select label="Categoría" labelPlacement="stacked" interface="popover" [(ngModel)]="categoria"><ion-select-option value="todas">Todas las categorías</ion-select-option>
+          @for (categoriaItem of categorias; track categoriaItem) { <ion-select-option [value]="categoriaItem">{{ categoriaItem }}</ion-select-option> }
+        </ion-select>
+        <ion-select label="Ordenar por" labelPlacement="stacked" interface="popover" [(ngModel)]="orden"><ion-select-option value="nombre">Nombre A–Z</ion-select-option><ion-select-option value="menor">Menor precio</ion-select-option><ion-select-option value="mayor">Mayor precio</ion-select-option></ion-select>
+        <div class="range-label">Precio máximo <strong>{{ precioMaximo | currency:'USD':'symbol':'1.0-0' }}</strong></div>
+        <ion-range aria-label="Precio máximo en dólares" [min]="0" [max]="limitePrecio" [step]="1" [(ngModel)]="precioMaximo"></ion-range>
+        <ion-button expand="block" fill="outline" (click)="limpiar()">Limpiar filtros</ion-button>
+        <p class="small muted">Precios de referencia en USD. Catálogo de demostración de DummyJSON.</p>
+      </aside>
+      <section aria-label="Catálogo de productos">
+        <div class="results-heading"><h2>El catálogo</h2><span class="muted small" role="status">{{ filtrados.length }} productos</span></div>
+        @if (filtrados.length === 0) {
+          <div class="empty"><h2>No encontramos coincidencias</h2><p>Probá otra búsqueda o ajustá los filtros.</p><ion-button (click)="limpiar()">Ver todos</ion-button></div>
+        } @else {
+          <ion-grid><ion-row>
+            @for (producto of filtrados; track producto.id) {
+              <ion-col size="12" size-sm="6" size-lg="4"><ion-card class="product-card">
+                <div class="product-photo"><img [src]="producto.thumbnail" [alt]="producto.title" loading="lazy"><ion-badge class="rating" color="light"><ion-icon name="star" aria-hidden="true"></ion-icon> {{ producto.rating | number:'1.1-1' }}</ion-badge></div>
+                <ion-card-header><ion-card-subtitle>{{ producto.category }}</ion-card-subtitle><ion-card-title>{{ producto.title }}</ion-card-title></ion-card-header>
+                <ion-card-content><p class="description">{{ producto.description }}</p><div class="product-price"><span class="price">{{ producto.price | currency:'USD' }}</span><span class="small muted">{{ producto.stock > 0 ? producto.stock + ' disponibles' : 'Sin stock' }}</span></div>
+                  <ion-button expand="block" [disabled]="producto.stock === 0" (click)="agregar(producto)" [attr.aria-label]="'Agregar ' + producto.title + ' al carrito'"><ion-icon slot="start" name="add-outline" aria-hidden="true"></ion-icon>Agregar</ion-button>
+                </ion-card-content>
+              </ion-card></ion-col>
+            }
+          </ion-row></ion-grid>
+        }
+      </section>
+    </div>
+  }
+  @if (carrito.aviso()) { <p class="notice" role="status">{{ carrito.aviso() }}</p> }
+</main>
+<ion-toast [isOpen]="toastAbierto" [message]="mensaje" [duration]="2400" position="top" (didDismiss)="toastAbierto = false"></ion-toast>
+</ion-content>

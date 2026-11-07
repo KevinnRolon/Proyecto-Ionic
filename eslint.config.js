@@ -9,6 +9,8 @@ module.exports = tseslint.config(
     extends: [...angular.configs.tsRecommended],
     processor: angular.processInlineTemplates,
     rules: {
+      // La consigna solicita inyección de servicios por constructor.
+      "@angular-eslint/prefer-inject": "off",
       "@angular-eslint/prefer-standalone": "off",
       "@angular-eslint/component-class-suffix": [
         "error",

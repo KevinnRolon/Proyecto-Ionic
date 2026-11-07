@@ -1,0 +1,20 @@
+<ion-header><ion-toolbar><ion-title>Tu carrito</ion-title></ion-toolbar></ion-header>
+<ion-content><main class="shell">
+  <div class="page-heading"><span class="eyebrow">Una buena selección</span><h1>Lo que elegiste.</h1><p>Revisá las cantidades antes de finalizar la simulación.</p></div>
+  @if (carrito.cantidad() === 0) {
+    <ion-card class="empty"><ion-icon [name]="pedidoSimulado ? 'checkmark-circle-outline' : 'cart-outline'" aria-hidden="true"></ion-icon><h2>{{ pedidoSimulado ? '¡Simulación completada!' : 'Tu carrito está esperando' }}</h2><p class="muted">{{ pedidoSimulado ? 'No se generó ningún pedido real ni se cobró dinero.' : 'Agregá tus favoritos desde el catálogo para empezar.' }}</p><ion-button routerLink="/tabs/productos">Explorar productos<ion-icon slot="end" name="arrow-forward-outline" aria-hidden="true"></ion-icon></ion-button></ion-card>
+  } @else {
+    <div class="cart-layout"><section aria-label="Productos seleccionados">
+      @for (item of carrito.items(); track item.producto.id) {
+        <ion-card class="cart-item"><img [src]="item.producto.thumbnail" [alt]="item.producto.title"><div class="item-info"><h2>{{ item.producto.title }}</h2><p class="muted small">{{ item.producto.price | currency:'USD' }} por unidad</p><div class="quantity">
+          <ion-button fill="outline" size="small" [attr.aria-label]="'Restar una unidad de ' + item.producto.title" (click)="carrito.cambiar(item.producto.id, item.cantidad - 1)"><ion-icon slot="icon-only" name="remove-outline" aria-hidden="true"></ion-icon></ion-button>
+          <span aria-live="polite">{{ item.cantidad }}</span>
+          <ion-button fill="outline" size="small" [disabled]="item.cantidad >= item.producto.stock" [attr.aria-label]="'Sumar una unidad de ' + item.producto.title" (click)="carrito.cambiar(item.producto.id, item.cantidad + 1)"><ion-icon slot="icon-only" name="add-outline" aria-hidden="true"></ion-icon></ion-button>
+          <ion-button fill="clear" color="danger" [attr.aria-label]="'Quitar ' + item.producto.title" (click)="carrito.cambiar(item.producto.id, 0)"><ion-icon slot="icon-only" name="trash-outline" aria-hidden="true"></ion-icon></ion-button>
+        </div></div><span class="price subtotal">{{ item.producto.price * item.cantidad | currency:'USD' }}</span></ion-card>
+      }
+      <ion-button fill="clear" (click)="vaciar()">Vaciar carrito</ion-button>
+    </section><ion-card class="summary"><ion-card-header><ion-card-title>Resumen</ion-card-title></ion-card-header><ion-card-content><div class="summary-line"><span>Unidades</span><strong>{{ carrito.cantidad() }}</strong></div><div class="summary-line total"><span>Total</span><strong>{{ carrito.total() | currency:'USD' }}</strong></div><ion-button expand="block" (click)="confirmar()">Finalizar simulación<ion-icon slot="end" name="arrow-forward-outline" aria-hidden="true"></ion-icon></ion-button><p class="small muted">Sin pagos ni envíos. Precios y cantidades de demostración guardados en este navegador; no se reserva inventario.</p></ion-card-content></ion-card></div>
+  }
+  @if (carrito.aviso()) { <p role="status" class="notice">{{ carrito.aviso() }}</p> }
+</main></ion-content>

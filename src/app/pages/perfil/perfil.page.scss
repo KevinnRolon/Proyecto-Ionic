@@ -1,0 +1,11 @@
+.profile-shell { max-width: 700px; }
+ion-card { padding: 14px; }
+ion-card-header { text-align: center; }
+.profile-avatar ion-icon { font-size: 74px; color: #176d5a; margin-bottom: 12px; }
+ion-card-title { margin-bottom: 8px; }
+ion-card-subtitle { text-transform: none; letter-spacing: 0; }
+ion-list { background: white; margin: 10px 0 25px; }
+ion-item { --padding-start: 0; margin-bottom: 10px; }
+.about { display: flex; align-items: center; gap: 16px; padding: 28px 12px; }
+.about > ion-icon { font-size: 35px; min-width: 35px; color: #176d5a; }
+.about p { margin: 5px 0; }
