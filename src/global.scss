@@ -1,0 +1,36 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; }
+ion-content { --background: #f6f5ef; }
+ion-toolbar { --background: #fff; --border-color: #e5e7e2; --min-height: 70px; }
+ion-title { font-weight: 750; letter-spacing: -.5px; }
+ion-tab-bar { --background: white; min-height: 68px; border-top: 1px solid #e0e5de; }
+ion-tab-button { --color: #66746c; --color-selected: #176d5a; font-weight: 650; }
+ion-button { --border-radius: 12px; text-transform: none; font-weight: 650; letter-spacing: 0; }
+ion-card { --background: #fff; border-radius: 18px; box-shadow: none; border: 1px solid #e3e7df; margin: 0; }
+ion-badge { border-radius: 7px; padding: 5px 8px; }
+ion-searchbar { --background: white; --box-shadow: none; --border-radius: 12px; padding: 0; }
+ion-item { --background: white; }
+.shell { max-width: 1160px; margin: auto; padding: 28px 24px 48px; }
+.brand { max-width: 1160px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 12px; }
+.brand-name { font-size: 20px; font-weight: 800; letter-spacing: -.8px; display: flex; gap: 10px; align-items: center; }
+.brand-name ion-icon { color: #176d5a; font-size: 27px; }
+.eyebrow { color: #176d5a; font-size: 12px; font-weight: 750; letter-spacing: 2px; text-transform: uppercase; }
+h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -1.6px; margin: 12px 0; color: #203b30; }
+h2 { font-weight: 750; letter-spacing: -.5px; }
+p { line-height: 1.6; }
+.muted { color: #65746b; }
+.empty { text-align: center; padding: 60px 20px; }
+.empty > ion-icon { font-size: 64px; color: #176d5a; }
+.notice { padding: 16px; border-radius: 12px; background: #fff2e5; color: #794118; }
+.page-heading { margin-bottom: 28px; }
+.page-heading p { margin: 0; color: #65746b; }
+.price { font-size: 22px; font-weight: 750; color: #203b30; }
+.small { font-size: 13px; }
+@media (max-width: 580px) { .shell { padding: 20px 16px 32px; } .brand { padding: 0 16px; } .brand-note { display: none; } }
