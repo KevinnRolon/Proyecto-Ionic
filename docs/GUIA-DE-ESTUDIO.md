@@ -38,9 +38,19 @@
 Realizarlos después de entender la base, verificarlos y registrar los cambios verdaderos en `IA.md`:
 
 - Explicar con tus palabras por qué existe un servicio para productos y otro para el carrito.
-- Elegir y traducir las etiquetas de categorías mediante un mapa, conservando los valores originales para filtrar.
+- Agregar una traducción nueva al mapa `models/categorias.ts`, conservando el valor original para filtrar.
 - Agregar un filtro de calificación mínima y comprobar cómo se combina con el precio.
-- Incorporar un botón para borrar el perfil local y decidir qué confirmación necesita.
+- Explicar cómo funciona la confirmación de Borrar perfil local y por qué cancelar conserva los datos.
 - Cambiar la identidad visual con decisiones propias y capturas nuevas.
 
 Estos ejercicios no aseguran ningún resultado de un detector ni convierten automáticamente código asistido en código propio. La finalidad es comprender, aportar cambios reales y poder defender las decisiones.
+
+## Mejoras del segundo recorrido
+
+La búsqueda normaliza el texto para ignorar tildes y también consulta las etiquetas de categorías en español. El filtro Solo con stock se combina con los filtros anteriores. El orden por calificación usa el nombre para desempatar.
+
+El total se suma en centavos enteros antes de convertirlo a dólares; de ese modo, sumar 0,10 y 0,20 produce exactamente 0,30. La recuperación del carrito ignora registros duplicados. El servicio HTTP valida el formato del JSON recibido, porque declarar una interfaz de TypeScript no valida datos externos durante la ejecución.
+
+La directiva `ImagenRespaldoDirective` escucha el error de una imagen y usa un archivo SVG local; su marca de respaldo evita reintentar indefinidamente si también falla ese archivo.
+
+El [recorrido de pruebas manuales](PRUEBAS-MANUALES.md) permite comprobar estas decisiones paso a paso.
