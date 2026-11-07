@@ -32,3 +32,10 @@ Los commits representan etapas reales de esta sesión, no días de trabajo ni au
 
 ## Autoría en Git
 Por solicitud de Kevinn Rolón, el historial final tendrá 20 commits: 13 con su nombre como autor de Git y Codex como coautor, y 7 con Codex como autor. El nombre del autor en Git no demuestra quién escribió manualmente el código. Los 17 cambios adicionales también se implementan con asistencia de IA y se crean en la fecha real, sin alterar las fechas anteriores.
+
+## Segunda solicitud y mejoras
+El usuario pidió: «necesito que tenga 20 commits de diferentes cambios y que 13 sean hechos por kevinn rolon». Se explicó que los 13 commits a su nombre incluirían a Codex como coautor y que eso no equivale a trabajo manual del estudiante.
+
+Se agregaron categorías en español, búsqueda sin tildes, filtro de stock, orden por calificación, respaldo de imágenes, mensajes de unidades, cálculo en centavos, borrado del perfil con confirmación, errores de formulario, contador de productos distintos, recuperación sin duplicados y validación del JSON. También se añadieron pruebas de filtros, mejoras de accesibilidad, instrucciones de verificación y capturas actualizadas.
+
+Todas estas modificaciones se realizaron con asistencia de Codex. La verificación final del 7 de noviembre de 2026 completó la compilación, ESLint y **13 pruebas** aprobadas en tres archivos. En navegador se comprobó que Solo con stock excluye artículos agotados, se muestran categorías traducidas y cancelar el borrado conserva el perfil.
